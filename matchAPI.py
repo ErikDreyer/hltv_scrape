@@ -1,16 +1,13 @@
-try:
-    import sys
-    from bs4 import BeautifulSoup
-    import urllib.request
-    from bs4 import BeautifulSoup, NavigableString, Tag
-except ImportError:
-    print("Could not import modules")
-    sys.exit()
+# !/usr/bin/env python3
+import sys
+from bs4 import BeautifulSoup
+import urllib.request
+from bs4 import BeautifulSoup, NavigableString, Tag
+
 
 
 class Match:
     """Class to take the values of the data of a match from www.hltv.org"""
-
 
     def __init__(self, match_date, match_date_url, team_1, team_1_url, team_2, team_2_url, map, event, event_url):
         self.match_date = match_date
@@ -22,7 +19,6 @@ class Match:
         self.map = map
         self.event = event
         self.event_url = event_url
-
 
     def get_match_info(self):
         """get the data from the match page"""

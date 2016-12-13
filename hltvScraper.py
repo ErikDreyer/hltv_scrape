@@ -1,14 +1,9 @@
 # !/usr/bin/env python3
-# hltv scrapeper
-try:
-    import sys
-    from bs4 import BeautifulSoup
-    import urllib.request
-    from bs4 import BeautifulSoup, NavigableString, Tag
-    from matchAPI import Match
-except ImportError:
-    print("Could not import modules")
-    sys.exit()
+import sys
+from bs4 import BeautifulSoup
+import urllib.request
+from bs4 import BeautifulSoup, NavigableString, Tag
+from matchAPI import Match
 
 
 def write_url_to_file(url, file_name):
