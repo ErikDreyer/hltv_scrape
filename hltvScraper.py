@@ -1,5 +1,5 @@
 # !/usr/bin/env python3
-#
+
 import sys
 from bs4 import BeautifulSoup
 import urllib.request
@@ -29,23 +29,28 @@ def main():
 
     while matches_found:
         # get the website link + 0ffset(used for filtering on website) and save to file
-        # saved to a file for other uses, can also be stored in an object directly
+	
+	# Filtering on the website: each page has 50 records of matches, thus the pages are numbered in increments of 50
+	# Thus page 1 = 0, page 2 = 50 etc.        
+
+	# saved to a file for other uses, can also be stored in an object directly
         # the program will keep on looping until all matches have been scraped
-        offset = multiplier * 50
+        
+	offset = multiplier * 50
         url = "http://www.hltv.org/?pageid=188&statsfilter=0&offset=" + str(offset)
         file_name = "index.html"
         write_url_to_file(url, file_name)
 
         # get the div containing the match data
         soup = BeautifulSoup(open("index.html"), "html5lib")
-        matches = soup.findAll("div", {"style": "padding-left:5px;padding-top:5px;"})
+        matches = soup.findAll("div", {"style": "padding-left:5px;padding-top:5px;"}) # the div with all the match data in has a certain and unique styling
 
-        # if there are matches on the page
+        # if there are matches on the page, or if matches == string
         if matches:
 
             # loop through matches' text (date, team_1, team_2, map, event)
-            match_data = [[''] * 5 for i in range(50)]
-            match_url = [[''] * 4 for k in range(50)]
+            match_data = [[''] * 5 for i in range(50)] # nested array
+            match_url = [[''] * 4 for k in range(50)] # nested array
             match_data_index = 0
             match_url_index = 0
 
