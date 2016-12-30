@@ -2,9 +2,8 @@
 """Scrape match data from the website hltv.org"""
 
 from match import *
-from bs4 import BeautifulSoup
-import urllib.request
 from bs4 import BeautifulSoup, NavigableString, Tag
+import json
 
 
 def main():
@@ -28,6 +27,8 @@ def main():
         match_url = [[''] * 4 for k in range(50)]  # nested array
         match_data_index = 0
         match_url_index = 0
+
+        page_matches = []
 
         # loop through matches
         for match_raw_data in match_raw_text:
@@ -62,19 +63,26 @@ def main():
                               match_data[match_data_index][3], match_data[match_data_index][4],
                               match_url[match_data_index][3])
 
-            print(obj_match.get_match_data())
+            # add the match data to the page_matches list
+            match_info = obj_match.get_match_data()
+            page_matches.append(match_info)
 
             # increment index counters
             match_data_index += 1
             match_url_index += 1
+
+        # dump json file
+        with open('match_json/page_' + str(filter_offset * filter_multiplier) + '.json', 'w') as f_obj:
+            json.dump(page_matches, f_obj)
 
         # increment offset multiplier
         filter_multiplier += 1
 
         matches_found = False  ##################### just checking first page ######################################
 
-        # if no matches were found
+
     else:
+        # if no matches were found
         matches_found = False
 
     print('> All matches have been scraped...')

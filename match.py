@@ -46,10 +46,10 @@ class Match:
         match_data['team_1_url'] = self.team_1_url
         match_data['team_2_name'] = self.team_2_name
         match_data['team_2_url'] = self.team_2_url
-        match_data['map'] = self.map_name
-        match_data['event'] = self.event_name
+        match_data['map_name'] = self.map_name
+        match_data['event_name'] = self.event_name
         match_data['event_url'] = self.event_url
-        return match_data.items()
+        return match_data
 
 
 def write_url_to_file(url, file_name):
